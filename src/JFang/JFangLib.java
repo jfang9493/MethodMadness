@@ -55,23 +55,25 @@ public class JFangLib {
         System.out.println(theList);
     }
 
-
-
     /**
-     * sumUpTo adds all of the numbers from 0 to the input number.
-     * sumUpTo(9) would be 0 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9, which would return 45
+     * leastCommonMultiple will return the least common multiple of three input numbers.
+     * For example, inputs 2, 3, and 6 will return 6 as the least common multiple.
      *
-     * @param num
+     * @param num1
+     * @param num2
+     * @param num3
      * @return
      */
-    public static int sumUpTo (int num)
+    public static int leastCommonMultiple (int num1, int num2, int num3)
     {
-        int total = 0;
-        for (int i = 0; i <= num; i++)
+        int highest = num1;
+        if (num2 > num1 && num2 > num3)  highest = num2;
+        if (num3 > num2 && num3 > num1)  highest = num3;
+        for (int i = highest; i <= num1*num2*num3; i++)
         {
-            total += i;
+            if (i % num1 == 0 && i % num2 == 0 && i % num3 == 0) return i;
         }
-        return total;
+        return highest;
     }
 
     /**
@@ -89,12 +91,21 @@ public class JFangLib {
         return day + month + year;
     }
 
+    /**
+     * quadSolver will plug Doubles a, b, and c into the quadratic equation and solve for the two roots.
+     * Will return two roots, but if the roots are imaginary, will return a statement saying so instead of the two roots.
+     *
+     * @param a
+     * @param b
+     * @param c
+     * @return
+     */
     public static String quadSolver (Double a, Double b, Double c) //b^2 - 4ac
     {
         if (b*b - 4*a*c < 0) return "The quadratic equation has imaginary roots";
         double sqRoot = Math.sqrt(b*b - 4*a*c);
-        int root1 = (-1*b + sqRoot)/ 2a;
-        int root2 = (-1*b - sqRoot)/ 2a;
-        return root1 + " " + root2;
+        double root1 = (-1*b + sqRoot)/ 2*a;
+        double root2 = (-1*b - sqRoot)/ 2*a;
+        return "Roots are " + root1 + " and " + root2;
     }
 }
